@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>se.kovanen.logodev</string>
+	<key>category</key>
+	<string>Internet</string>
+	<key>connections</key>
+	<dict>
+		<key>3917503B-7CD0-48B2-B89C-215A4BD2B759</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8C22261D-896A-4724-A2F9-E44D7BA2B440</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Lari Kovanen</string>
+	<key>description</key>
+	<string>Search for a company logo to use in your projects.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>logo.dev</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>8C22261D-896A-4724-A2F9-E44D7BA2B440</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>logo</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Please wait</string>
+				<key>script</key>
+				<string>query=$1
+
+[[ -d "${alfred_workflow_cache}/icons" ]] || mkdir "${alfred_workflow_cache}/icons"
+
+curl --header "Authorization: Bearer: $ldsk" "https://api.logo.dev/search?q=$1" -o "${alfred_workflow_cache}/result.json"
+jq -r --arg path "$alfred_workflow_cache" '.[] | "-o \"" + $path + "/icons/" + .domain + ".jpg\" " + .logo_url' "${alfred_workflow_cache}/result.json" | xargs curl -s
+jq --arg path "$alfred_workflow_cache" '{items: [.[]| {uid:.domain, title:.name, subtitle: .domain, arg:.logo_url, icon: {path: $path + "/icons/" + .domain + ".jpg"}}] }' "${alfred_workflow_cache}/result.json"
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Enter company/org name</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3917503B-7CD0-48B2-B89C-215A4BD2B759</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Search for company and organization logos via logo.dev and copy link to selected icon to the clipboard.</string>
+	<key>uidata</key>
+	<dict>
+		<key>3917503B-7CD0-48B2-B89C-215A4BD2B759</key>
+		<dict>
+			<key>xpos</key>
+			<real>315</real>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>8C22261D-896A-4724-A2F9-E44D7BA2B440</key>
+		<dict>
+			<key>xpos</key>
+			<real>510</real>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>logo.dev secret key</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>ldsk</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>http://kovanen.se/</string>
+</dict>
+</plist>
