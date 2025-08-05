@@ -109,7 +109,7 @@ jq --arg path "$alfred_workflow_cache" '{items: [.[]| {uid:.domain, title:.name,
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Search for company and organization logos via logo.dev and copy link to selected icon to the clipboard.</string>
+	<string>Search for company and organization logos via logo.dev and copy link to selected icon to the clipboard with enter as a jpg image. Hold down Alt for a light PNG image or Cmd for a dark PNG image.</string>
 	<key>uidata</key>
 	<dict>
 		<key>3917503B-7CD0-48B2-B89C-215A4BD2B759</key>
@@ -151,10 +151,8 @@ jq --arg path "$alfred_workflow_cache" '{items: [.[]| {uid:.domain, title:.name,
 			<string>ldsk</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>webaddress</key>
 	<string>http://kovanen.se/</string>
 </dict>
