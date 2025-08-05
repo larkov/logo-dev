@@ -6,7 +6,11 @@ Workflow to search for logos at [logo.dev][1].
 To be able to use this workflow you need an account at [logo.dev][1] and enter your secret key during configuration of the workflow.
 
 ## Usage
-Open the Alfred search bar and type `logo` and a search term and it will fetch the results and show the coresponding logos. Press enter to copy the url to the clipboard.
+Open the Alfred search bar and type `logo` and a search term and it will fetch the results and show the coresponding logos.
+- Press enter to copy the url to the clipboard for a jpeg icon.
+- Hold down Alt and press enter to copy a light PNG url.
+- Hold down Cmd and press enter to copy a dark PNG url.
+
 ![Displaying the result for searching the term "logo"](./logo-dev.png)
 
 

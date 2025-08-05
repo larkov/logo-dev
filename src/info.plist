@@ -85,7 +85,7 @@
 
 curl --header "Authorization: Bearer: $ldsk" "https://api.logo.dev/search?q=$1" -o "${alfred_workflow_cache}/result.json"
 jq -r --arg path "$alfred_workflow_cache" '.[] | "-o \"" + $path + "/icons/" + .domain + ".jpg\" " + .logo_url' "${alfred_workflow_cache}/result.json" | xargs curl -s
-jq --arg path "$alfred_workflow_cache" '{items: [.[]| {uid:.domain, title:.name, subtitle: .domain, arg:.logo_url, icon: {path: $path + "/icons/" + .domain + ".jpg"}}] }' "${alfred_workflow_cache}/result.json"
+jq --arg path "$alfred_workflow_cache" '{items: [.[]| {uid:.domain, title:.name, subtitle: .domain, arg:.logo_url, mods: { alt: { valid: true, arg: .logo_url + "?theme=light&amp;format=png", subtitle: "Light PNG"}, cmd: { valid: true, arg: .logo_url + "?theme=dark&amp;format=png", subtitle: "Dark PNG"},}, icon: {path: $path + "/icons/" + .domain + ".jpg"}}] }' "${alfred_workflow_cache}/result.json"
 </string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
